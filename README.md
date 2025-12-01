@@ -1,16 +1,11 @@
 # Advent of Code 2025 (Go)
 
 Solutions for the 2025 edition of [Advent of Code](https://adventofcode.com/)
-implemented in Go 1.24. Each puzzle day lives in its own file (e.g. `day1.go`)
-and the `main` package dispatches to the requested day/part.
-
-## Requirements
-
-- Go 1.24 or newer (`go version` shows `go1.24.4` in this workspace)
+implemented in Go 1.24.
 
 ## Usage
 
-After cloning the repo and `cd`ing into it:
+After cloning the repo and `cd`'ing into it:
 
 ```bash
 go run . <input-file> <day> <part>
@@ -27,4 +22,10 @@ My inputs are not provided. Get yours from the website.
 ## Repository Layout
 
 - `main.go` – argument parsing and day/part dispatch
-- `dayX.go` – solutions for Day X Part 1 (`dayXa`) and Part 2 (`dayXb`)
+- `dayX.go` – solutions for Day X Part 1 and Part 2
+
+## Progress
+
+| Day | Notes/hint |
+| --- | --- |
+| [Day 1](https://github.com/steyou/advent-of-code-2025/blob/df39222cc16c7ea58af865c66a93d3f3b0ab9349/day1.go) | Implemented using modulo math |
