@@ -17,7 +17,8 @@ Example: solve Day 1 Part 2 using an input file stored at `inputs/day01.txt`.
 go run . inputs/day01.txt 1 2
 ```
 
-My inputs are not provided. Get yours from the website.
+Puzzle inputs are not included in the repo (since sharing them is discouraged).
+Access yours from the website.
 
 ## Repository Layout
 
