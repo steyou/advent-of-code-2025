@@ -88,7 +88,10 @@ func day2bMeta(fileName string) error {
 
 	lineByComma := strings.Split(line, ",")
 	for _, num := range lineByComma {
-		n, _ := strconv.Atoi(num)
+		n, err := strconv.Atoi(num)
+		if err != nil {
+			return err
+		}
 		if n > max {
 			max = n
 		}
