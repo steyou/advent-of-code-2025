@@ -19,7 +19,7 @@ func main() {
 		fmt.Println("error: ", err)
 		return
 	}
-	if dayNum != 1 {
+	if !(dayNum >= 1 && dayNum <= 15) {
 		fmt.Println("Invalid day, expected `1 <= arg <= 15`")
 		return
 	}
@@ -29,7 +29,7 @@ func main() {
 		fmt.Println("error: ", err)
 		return
 	}
-	if partNum != 1 && partNum != 2 {
+	if !(partNum >= 1 && partNum <= 3) {
 		fmt.Println("Invalid part, expected 1 or 2")
 		return
 	}
@@ -40,6 +40,14 @@ func main() {
 			err = day1a(os.Args[1])
 		} else {
 			err = day1b(os.Args[1])
+		}
+	case 2:
+		if partNum == 1 {
+			err = day2a(os.Args[1])
+		} else if partNum == 3 {
+			err = day2bMeta(os.Args[1])
+		} else {
+			err = day2b(os.Args[1])
 		}
 	default:
 		fmt.Println("fallback case")
