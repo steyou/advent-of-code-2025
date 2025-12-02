@@ -20,6 +20,9 @@ go run . inputs/day01.txt 1 2
 Puzzle inputs are not included in the repo (since sharing them is discouraged).
 Access yours from the website.
 
+**Note:** For day 2 part B specifically you will need to run `go generate` with your input
+called `input/day2.txt` as it involves generating code ahead of time.
+
 ## Repository Layout
 
 - `main.go` – argument parsing and day/part dispatch
