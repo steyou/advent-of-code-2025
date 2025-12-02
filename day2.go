@@ -1,5 +1,7 @@
 package main
 
+//go:generate sh -c "go run . inputs/day2_generate.txt 2 3 > checkRepeatingTmp; mv checkRepeatingTmp checkRepeating.go"
+
 import (
 	"os"
 	"fmt"
@@ -123,14 +125,14 @@ func day2bMeta(fileName string) error {
 		}
 	}
 
-	fmt.Printf("switch (x) {\n")
+	fmt.Printf("package main\nfunc checkRepeating(x int) bool {\nswitch (x) {\n")
 
 	// Print all unique repeating numbers
 	for num := range repeatingSet {
 		fmt.Printf("case %d:\n\treturn true\n", num)
 	}
 
-	fmt.Println("}\nreturn false")
+	fmt.Println("}\nreturn false\n}")
 
 	return nil
 }
