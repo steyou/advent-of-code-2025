@@ -1,6 +1,6 @@
 package main
 
-//go:generate sh -c "go run . inputs/day2_generate.txt 2 3 > checkRepeatingTmp; mv checkRepeatingTmp checkRepeating.go"
+//go:generate sh -c "go run . inputs/day2.txt 2 3 > checkRepeatingTmp; mv checkRepeatingTmp checkRepeating.go"
 
 import (
 	"os"
@@ -87,13 +87,25 @@ func day2bMeta(fileName string) error {
 	line := scanner.Text()
 
 	lineByComma := strings.Split(line, ",")
-	for _, num := range lineByComma {
-		n, err := strconv.Atoi(num)
+	for _, pair := range lineByComma {
+		pairByDash := strings.Split(pair, "-")
+
+		// Check lower bound
+		lower, err := strconv.Atoi(pairByDash[0])
 		if err != nil {
 			return err
 		}
-		if n > max {
-			max = n
+		if lower > max {
+			max = lower
+		}
+
+		// Check upper bound
+		upper, err := strconv.Atoi(pairByDash[1])
+		if err != nil {
+			return err
+		}
+		if upper > max {
+			max = upper
 		}
 	}
 
