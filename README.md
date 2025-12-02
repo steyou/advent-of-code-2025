@@ -29,4 +29,5 @@ Access yours from the website.
 
 | Day | Notes/hint |
 | --- | --- |
-| [Day 1](https://github.com/steyou/advent-of-code-2025/blob/df39222cc16c7ea58af865c66a93d3f3b0ab9349/day1.go) | Implemented using modulo math |
+| [Day 1](https://github.com/steyou/advent-of-code-2025/blob/df39222cc16c7ea58af865c66a93d3f3b0ab9349/day1.go) | Implemented using modulo math. |
+| [Day 2](https://github.com/steyou/advent-of-code-2025/blob/e9af009759169341c66a7fb6611ab0209131795a/day2.go) | <p>**Part 1** "Masked" and compared the upper and lower half since only numbers of even length can have matches.</p><p>**Part 2** Generated a switch case ahead-of-time containing all numbers built with repeating patterns (~50k lines long file just on the sample input!). Actually faster than using the "correct" algorithm.</p>|
