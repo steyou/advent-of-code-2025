@@ -49,6 +49,18 @@ func main() {
 		} else {
 			err = day2b(os.Args[1])
 		}
+	case 3:
+		if partNum == 1 {
+			err = day3a(os.Args[1])
+		} else {
+			err = day3b(os.Args[1])
+		}
+	case 4:
+		if partNum == 1 {
+			err = day4a(os.Args[1])
+		} else {
+			err = day4b(os.Args[1])
+		}
 	default:
 		fmt.Println("fallback case")
 		err = day1a(os.Args[1])
