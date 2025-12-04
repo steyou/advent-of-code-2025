@@ -338,7 +338,6 @@ func day4b(fileName string) error {
 			})
 		}
 		if grid[two_d_to_index(width-1,0,width)] == '@' {
-			sum += 1
 			coordinates = append(coordinates, Coordinate{
 				x:width-1,
 				y:0,
