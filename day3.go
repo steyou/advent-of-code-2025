@@ -1,10 +1,10 @@
 package main
 
 import (
+	"bufio"
+	"fmt"
 	"math"
 	"os"
-	"fmt"
-	"bufio"
 )
 
 func day3a(fileName string) error {
@@ -45,7 +45,7 @@ func day3a(fileName string) error {
 			}
 		}
 
-		sum += int(leadingMax) * 10 + int(trailingMax)
+		sum += int(leadingMax)*10 + int(trailingMax)
 	}
 
 	fmt.Println(sum)
@@ -97,7 +97,7 @@ func day3b(fileName string) error {
 		}
 
 		for i := 0; i < sequenceLength; i++ {
-			sum += int(sequence[i]) * int(math.Pow10(sequenceLength - i - 1))
+			sum += int(sequence[i]) * int(math.Pow10(sequenceLength-i-1))
 		}
 		// if you wanted to show the chosen number for this line you'd print
 		// sum - oldSum

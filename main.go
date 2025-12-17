@@ -8,7 +8,7 @@ import (
 
 func main() {
 	argc := len(os.Args)
-	if (argc != 4) {
+	if argc != 4 {
 		// fmt.Println("Expected day number. ie `go run . 1` for day 1")
 		fmt.Printf("Expected: `%s file_path day part`\n", os.Args[0])
 		return
@@ -34,7 +34,7 @@ func main() {
 		return
 	}
 
-	switch (dayNum) {
+	switch dayNum {
 	case 1:
 		if partNum == 1 {
 			err = day1a(os.Args[1])
@@ -72,6 +72,30 @@ func main() {
 			err = day6a(os.Args[1])
 		} else {
 			err = day6b(os.Args[1])
+		}
+	case 7:
+		if partNum == 1 {
+			err = day7a(os.Args[1])
+		} else {
+			err = day7b(os.Args[1])
+		}
+	case 8:
+		err = day8a(os.Args[1])
+	case 9:
+		if partNum == 1 {
+			err = day9a(os.Args[1])
+		} else {
+			err = day9b(os.Args[1])
+		}
+	case 10:
+		err = day10a(os.Args[1])
+	case 11:
+		err = day11a(os.Args[1])
+	case 12:
+		if partNum == 1 {
+			err = day12a(os.Args[1])
+		// } else {
+		// 	err = day12b(os.Args[1])
 		}
 	default:
 		fmt.Println("fallback case")

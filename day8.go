@@ -10,7 +10,7 @@ import (
 )
 
 type Point8 struct {
-	x, y, z, circuit int
+	x, y, z int
 }
 
 type Edge8 struct {
@@ -20,18 +20,19 @@ type Edge8 struct {
 
 type unionFind8 struct {
 	parent []int
-	rank   []int
+	size   []int
 }
 
 func newUnionFind8(n int) *unionFind8 {
 	parent := make([]int, n)
-	rank := make([]int, n)
+	size := make([]int, n)
 	for i := range parent {
 		parent[i] = i
+		size[i] = 1
 	}
 	return &unionFind8{
 		parent: parent,
-		rank:   rank,
+		size:   size,
 	}
 }
 
@@ -48,15 +49,23 @@ func (uf *unionFind8) union(a, b int) bool {
 	if rootA == rootB {
 		return false
 	}
-	if uf.rank[rootA] < uf.rank[rootB] {
-		uf.parent[rootA] = rootB
-	} else if uf.rank[rootA] > uf.rank[rootB] {
-		uf.parent[rootB] = rootA
-	} else {
-		uf.parent[rootB] = rootA
-		uf.rank[rootA]++
+	if uf.size[rootA] < uf.size[rootB] {
+		rootA, rootB = rootB, rootA
 	}
+	uf.parent[rootB] = rootA
+	uf.size[rootA] += uf.size[rootB]
 	return true
+}
+
+func (uf *unionFind8) componentSizes() []int {
+	sizes := make([]int, 0, len(uf.parent))
+	for i := range uf.parent {
+		root := uf.find(i)
+		if root == i {
+			sizes = append(sizes, uf.size[i])
+		}
+	}
+	return sizes
 }
 
 func day8a(fileName string) error {
@@ -72,43 +81,32 @@ func day8a(fileName string) error {
 
 	for scanner.Scan() {
 		line := scanner.Text()
-		if line == "" {
-			continue
-		}
 
 		values := strings.Split(line, ",")
 
-		x, err := strconv.Atoi(values[0])
-		if err != nil {
-			return err
-		}
-		y, err := strconv.Atoi(values[1])
-		if err != nil {
-			return err
-		}
-		z, err := strconv.Atoi(values[2])
-		if err != nil {
-			return err
-		}
+		x, _ := strconv.Atoi(values[0])
+		y, _ := strconv.Atoi(values[1])
+		z, _ := strconv.Atoi(values[2])
 
 		points = append(points, Point8{
-			x:       x,
-			y:       y,
-			z:       z,
-			circuit: -1,
+			x: x,
+			y: y,
+			z: z,
 		})
 	}
 
 	n := len(points)
 	edges := make([]Edge8, 0, n*(n-1)/2)
 	for i := 0; i < n; i++ {
+		pointOuter := points[i]
 		for j := i + 1; j < n; j++ {
-			pointOuter := points[i]
 			pointInner := points[j]
+
 			x := pointOuter.x - pointInner.x
 			y := pointOuter.y - pointInner.y
 			z := pointOuter.z - pointInner.z
 			dist := x*x + y*y + z*z
+
 			edges = append(edges, Edge8{
 				lhs:      i,
 				rhs:      j,
@@ -122,36 +120,27 @@ func day8a(fileName string) error {
 	})
 
 	uf := newUnionFind8(n)
-	selected := 0
 
-	circuits := make([]int, 0, 300)
-	for _, e := range edges {
-		if uf.union(e.lhs, e.rhs) {
-			lhs := &points[e.lhs]
-			rhs := &points[e.rhs]
-			if lhs.circuit != -1 && rhs.circuit == -1 {
-				rhs.circuit = lhs.circuit
-				circuits[lhs.circuit]++
-			} else if lhs.circuit == -1 && rhs.circuit != -1 {
-				lhs.circuit = rhs.circuit
-				circuits[rhs.circuit]++
-			} else if lhs.circuit == -1 && rhs.circuit == -1 {
-				circuits = append(circuits, 2)
-				lhs.circuit = len(circuits) - 1
-				rhs.circuit = lhs.circuit
-			} else if lhs.circuit != rhs.circuit {
-				fmt.Println("huh?")
-			}
-			selected++
-			if selected == n-1 {
-				break
-			}
-		}
+	// for i := 0; true; i++ {
+	for i := 0; i < 1000; i++ {
+		edge := edges[i]
+		uf.union(edge.lhs, edge.rhs)
+
+		//// Part 2:
+		// if i > 1000 {
+		// 	circuits := uf.componentSizes()
+		// 	if len(circuits) == 1 {
+		// 		fmt.Println(i)
+		// 		fmt.Println(points[edge.lhs])
+		// 		fmt.Println(points[edge.rhs])
+		// 		break
+		// 	}
+		// }
 	}
 
+	circuits := uf.componentSizes()
 	sort.Ints(circuits)
 
-	// fmt.Println(maxCircuit)
 	fmt.Println(len(circuits))
 	fmt.Println(circuits)
 

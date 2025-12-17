@@ -1,9 +1,9 @@
 package main
 
 import (
-	"os"
-	"fmt"
 	"bufio"
+	"fmt"
+	"os"
 	"strconv"
 )
 
@@ -77,7 +77,7 @@ func day1b(fileName string) error {
 			if dial == 0 {
 				// We don't want to count wrapping around here since we already
 				// counted landing on zero on the last iteration
-				wraps--;
+				wraps--
 			}
 			if wraps > 0 {
 				// Indirectly this means that magnitude >= 100, in which you

@@ -3,12 +3,12 @@ package main
 //go:generate sh -c "go run . inputs/day2.txt 2 3 > checkRepeatingTmp; mv checkRepeatingTmp checkRepeating.go"
 
 import (
-	"os"
-	"fmt"
 	"bufio"
+	"fmt"
+	"math"
+	"os"
 	"strconv"
 	"strings"
-	"math"
 )
 
 func day2a(fileName string) error {
@@ -43,7 +43,7 @@ func day2a(fileName string) error {
 			// `i` changes
 			numLengthInt := len(strconv.Itoa(i))
 
-			if numLengthInt & 1 == 1 {
+			if numLengthInt&1 == 1 {
 				// Skip to next power of 10 (next even-length range)
 				nextPow := int(math.Pow10(numLengthInt))
 				if nextPow <= upper {

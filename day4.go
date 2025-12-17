@@ -1,8 +1,8 @@
 package main
 
 import (
-	"fmt"
 	"bufio"
+	"fmt"
 	"os"
 )
 
@@ -52,19 +52,19 @@ func day4a(fileName string) error {
 	sum := 0
 
 	// count the middle
-	for y := 1; y < h - 1; y++ {
-		for x := 1; x < width - 1; x++ {
-			if grid[two_d_to_index(x,y,width)] == '@' {
-				var kernel int = int(grid[two_d_to_index(x-1,y-1,width)])
-				kernel += int(grid[two_d_to_index(x,y-1,width)])
-				kernel += int(grid[two_d_to_index(x+1,y-1,width)])
+	for y := 1; y < h-1; y++ {
+		for x := 1; x < width-1; x++ {
+			if grid[two_d_to_index(x, y, width)] == '@' {
+				var kernel int = int(grid[two_d_to_index(x-1, y-1, width)])
+				kernel += int(grid[two_d_to_index(x, y-1, width)])
+				kernel += int(grid[two_d_to_index(x+1, y-1, width)])
 
-				kernel += int(grid[two_d_to_index(x-1,y,width)])
-				kernel += int(grid[two_d_to_index(x+1,y,width)])
+				kernel += int(grid[two_d_to_index(x-1, y, width)])
+				kernel += int(grid[two_d_to_index(x+1, y, width)])
 
-				kernel += int(grid[two_d_to_index(x-1,y+1,width)])
-				kernel += int(grid[two_d_to_index(x,y+1,width)])
-				kernel += int(grid[two_d_to_index(x+1,y+1,width)])
+				kernel += int(grid[two_d_to_index(x-1, y+1, width)])
+				kernel += int(grid[two_d_to_index(x, y+1, width)])
+				kernel += int(grid[two_d_to_index(x+1, y+1, width)])
 
 				// How I derived the "magic" 440 using ASCII values:
 				//
@@ -96,14 +96,14 @@ func day4a(fileName string) error {
 	}
 
 	// count the top row
-	for x := 1; x < width - 1; x++ {
-		if grid[two_d_to_index(x,0,width)] == '@' {
-			var kernel int = int(grid[two_d_to_index(x-1,0,width)])
-			kernel += int(grid[two_d_to_index(x+1,0,width)])
+	for x := 1; x < width-1; x++ {
+		if grid[two_d_to_index(x, 0, width)] == '@' {
+			var kernel int = int(grid[two_d_to_index(x-1, 0, width)])
+			kernel += int(grid[two_d_to_index(x+1, 0, width)])
 
-			kernel += int(grid[two_d_to_index(x-1,1,width)])
-			kernel += int(grid[two_d_to_index(x,1,width)])
-			kernel += int(grid[two_d_to_index(x+1,1,width)])
+			kernel += int(grid[two_d_to_index(x-1, 1, width)])
+			kernel += int(grid[two_d_to_index(x, 1, width)])
+			kernel += int(grid[two_d_to_index(x+1, 1, width)])
 
 			if kernel < 302 {
 				sum += 1
@@ -112,14 +112,14 @@ func day4a(fileName string) error {
 	}
 
 	// count the bottom row
-	for x := 1; x < width - 1; x++ {
-		if grid[two_d_to_index(x,h-1,width)] == '@' {
-			var kernel int = int(grid[two_d_to_index(x-1,h-1,width)])
-			kernel += int(grid[two_d_to_index(x+1,h-1,width)])
+	for x := 1; x < width-1; x++ {
+		if grid[two_d_to_index(x, h-1, width)] == '@' {
+			var kernel int = int(grid[two_d_to_index(x-1, h-1, width)])
+			kernel += int(grid[two_d_to_index(x+1, h-1, width)])
 
-			kernel += int(grid[two_d_to_index(x-1,h-2,width)])
-			kernel += int(grid[two_d_to_index(x,h-2,width)])
-			kernel += int(grid[two_d_to_index(x+1,h-2,width)])
+			kernel += int(grid[two_d_to_index(x-1, h-2, width)])
+			kernel += int(grid[two_d_to_index(x, h-2, width)])
+			kernel += int(grid[two_d_to_index(x+1, h-2, width)])
 
 			if kernel < 302 {
 				sum += 1
@@ -128,14 +128,14 @@ func day4a(fileName string) error {
 	}
 
 	// count the left column
-	for y := 1; y < h - 1; y++ {
-		if grid[two_d_to_index(0,y,width)] == '@' {
-			var kernel int = int(grid[two_d_to_index(0,y-1,width)])
-			kernel += int(grid[two_d_to_index(0,y+1,width)])
+	for y := 1; y < h-1; y++ {
+		if grid[two_d_to_index(0, y, width)] == '@' {
+			var kernel int = int(grid[two_d_to_index(0, y-1, width)])
+			kernel += int(grid[two_d_to_index(0, y+1, width)])
 
-			kernel += int(grid[two_d_to_index(1,y-1,width)])
-			kernel += int(grid[two_d_to_index(1,y,width)])
-			kernel += int(grid[two_d_to_index(1,y+1,width)])
+			kernel += int(grid[two_d_to_index(1, y-1, width)])
+			kernel += int(grid[two_d_to_index(1, y, width)])
+			kernel += int(grid[two_d_to_index(1, y+1, width)])
 
 			if kernel < 302 {
 				sum += 1
@@ -144,14 +144,14 @@ func day4a(fileName string) error {
 	}
 
 	// count the right column
-	for y := 1; y < h - 1; y++ {
-		if grid[two_d_to_index(width-1,y,width)] == '@' {
-			var kernel int = int(grid[two_d_to_index(width-1,y-1,width)])
-			kernel += int(grid[two_d_to_index(width-1,y+1,width)])
+	for y := 1; y < h-1; y++ {
+		if grid[two_d_to_index(width-1, y, width)] == '@' {
+			var kernel int = int(grid[two_d_to_index(width-1, y-1, width)])
+			kernel += int(grid[two_d_to_index(width-1, y+1, width)])
 
-			kernel += int(grid[two_d_to_index(width-2,y-1,width)])
-			kernel += int(grid[two_d_to_index(width-2,y,width)])
-			kernel += int(grid[two_d_to_index(width-2,y+1,width)])
+			kernel += int(grid[two_d_to_index(width-2, y-1, width)])
+			kernel += int(grid[two_d_to_index(width-2, y, width)])
+			kernel += int(grid[two_d_to_index(width-2, y+1, width)])
 
 			if kernel < 302 {
 				sum += 1
@@ -164,16 +164,16 @@ func day4a(fileName string) error {
 	// You don't need a loop or even counting because there are three
 	// adjacent spaces and we are checking for less than four. Under that
 	// condition it becomes a tautology
-	if grid[two_d_to_index(0,0,width)] == '@' {
+	if grid[two_d_to_index(0, 0, width)] == '@' {
 		sum += 1
 	}
-	if grid[two_d_to_index(width-1,0,width)] == '@' {
+	if grid[two_d_to_index(width-1, 0, width)] == '@' {
 		sum += 1
 	}
-	if grid[two_d_to_index(0,h-1,width)] == '@' {
+	if grid[two_d_to_index(0, h-1, width)] == '@' {
 		sum += 1
 	}
-	if grid[two_d_to_index(width-1,h-1,width)] == '@' {
+	if grid[two_d_to_index(width-1, h-1, width)] == '@' {
 		sum += 1
 	}
 
@@ -204,19 +204,19 @@ func day4b(fileName string) error {
 
 	for {
 		// count the middle
-		for y := 1; y < h - 1; y++ {
-			for x := 1; x < width - 1; x++ {
-				if grid[two_d_to_index(x,y,width)] == '@' {
-					var kernel int = int(grid[two_d_to_index(x-1,y-1,width)])
-					kernel += int(grid[two_d_to_index(x,y-1,width)])
-					kernel += int(grid[two_d_to_index(x+1,y-1,width)])
+		for y := 1; y < h-1; y++ {
+			for x := 1; x < width-1; x++ {
+				if grid[two_d_to_index(x, y, width)] == '@' {
+					var kernel int = int(grid[two_d_to_index(x-1, y-1, width)])
+					kernel += int(grid[two_d_to_index(x, y-1, width)])
+					kernel += int(grid[two_d_to_index(x+1, y-1, width)])
 
-					kernel += int(grid[two_d_to_index(x-1,y,width)])
-					kernel += int(grid[two_d_to_index(x+1,y,width)])
+					kernel += int(grid[two_d_to_index(x-1, y, width)])
+					kernel += int(grid[two_d_to_index(x+1, y, width)])
 
-					kernel += int(grid[two_d_to_index(x-1,y+1,width)])
-					kernel += int(grid[two_d_to_index(x,y+1,width)])
-					kernel += int(grid[two_d_to_index(x+1,y+1,width)])
+					kernel += int(grid[two_d_to_index(x-1, y+1, width)])
+					kernel += int(grid[two_d_to_index(x, y+1, width)])
+					kernel += int(grid[two_d_to_index(x+1, y+1, width)])
 
 					// How I derived the "magic" 440 using ASCII values:
 					//
@@ -242,8 +242,8 @@ func day4b(fileName string) error {
 					// Here since we need less than 4 `@` the condition is < 440
 					if kernel < 440 {
 						coordinates = append(coordinates, Coordinate{
-							x:x,
-							y:y,
+							x: x,
+							y: y,
 						})
 					}
 				}
@@ -251,76 +251,76 @@ func day4b(fileName string) error {
 		}
 
 		// count the top row
-		for x := 1; x < width - 1; x++ {
-			if grid[two_d_to_index(x,0,width)] == '@' {
-				var kernel int = int(grid[two_d_to_index(x-1,0,width)])
-				kernel += int(grid[two_d_to_index(x+1,0,width)])
+		for x := 1; x < width-1; x++ {
+			if grid[two_d_to_index(x, 0, width)] == '@' {
+				var kernel int = int(grid[two_d_to_index(x-1, 0, width)])
+				kernel += int(grid[two_d_to_index(x+1, 0, width)])
 
-				kernel += int(grid[two_d_to_index(x-1,1,width)])
-				kernel += int(grid[two_d_to_index(x,1,width)])
-				kernel += int(grid[two_d_to_index(x+1,1,width)])
+				kernel += int(grid[two_d_to_index(x-1, 1, width)])
+				kernel += int(grid[two_d_to_index(x, 1, width)])
+				kernel += int(grid[two_d_to_index(x+1, 1, width)])
 
 				if kernel < 302 {
 					coordinates = append(coordinates, Coordinate{
-						x:x,
-						y:0,
+						x: x,
+						y: 0,
 					})
 				}
 			}
 		}
 
 		// count the bottom row
-		for x := 1; x < width - 1; x++ {
-			if grid[two_d_to_index(x,h-1,width)] == '@' {
-				var kernel int = int(grid[two_d_to_index(x-1,h-1,width)])
-				kernel += int(grid[two_d_to_index(x+1,h-1,width)])
+		for x := 1; x < width-1; x++ {
+			if grid[two_d_to_index(x, h-1, width)] == '@' {
+				var kernel int = int(grid[two_d_to_index(x-1, h-1, width)])
+				kernel += int(grid[two_d_to_index(x+1, h-1, width)])
 
-				kernel += int(grid[two_d_to_index(x-1,h-2,width)])
-				kernel += int(grid[two_d_to_index(x,h-2,width)])
-				kernel += int(grid[two_d_to_index(x+1,h-2,width)])
+				kernel += int(grid[two_d_to_index(x-1, h-2, width)])
+				kernel += int(grid[two_d_to_index(x, h-2, width)])
+				kernel += int(grid[two_d_to_index(x+1, h-2, width)])
 
 				if kernel < 302 {
 					coordinates = append(coordinates, Coordinate{
-						x:x,
-						y:h-1,
+						x: x,
+						y: h - 1,
 					})
 				}
 			}
 		}
 
 		// count the left column
-		for y := 1; y < h - 1; y++ {
-			if grid[two_d_to_index(0,y,width)] == '@' {
-				var kernel int = int(grid[two_d_to_index(0,y-1,width)])
-				kernel += int(grid[two_d_to_index(0,y+1,width)])
+		for y := 1; y < h-1; y++ {
+			if grid[two_d_to_index(0, y, width)] == '@' {
+				var kernel int = int(grid[two_d_to_index(0, y-1, width)])
+				kernel += int(grid[two_d_to_index(0, y+1, width)])
 
-				kernel += int(grid[two_d_to_index(1,y-1,width)])
-				kernel += int(grid[two_d_to_index(1,y,width)])
-				kernel += int(grid[two_d_to_index(1,y+1,width)])
+				kernel += int(grid[two_d_to_index(1, y-1, width)])
+				kernel += int(grid[two_d_to_index(1, y, width)])
+				kernel += int(grid[two_d_to_index(1, y+1, width)])
 
 				if kernel < 302 {
 					coordinates = append(coordinates, Coordinate{
-						x:0,
-						y:y,
+						x: 0,
+						y: y,
 					})
 				}
 			}
 		}
 
 		// count the right column
-		for y := 1; y < h - 1; y++ {
-			if grid[two_d_to_index(width-1,y,width)] == '@' {
-				var kernel int = int(grid[two_d_to_index(width-1,y-1,width)])
-				kernel += int(grid[two_d_to_index(width-1,y+1,width)])
+		for y := 1; y < h-1; y++ {
+			if grid[two_d_to_index(width-1, y, width)] == '@' {
+				var kernel int = int(grid[two_d_to_index(width-1, y-1, width)])
+				kernel += int(grid[two_d_to_index(width-1, y+1, width)])
 
-				kernel += int(grid[two_d_to_index(width-2,y-1,width)])
-				kernel += int(grid[two_d_to_index(width-2,y,width)])
-				kernel += int(grid[two_d_to_index(width-2,y+1,width)])
+				kernel += int(grid[two_d_to_index(width-2, y-1, width)])
+				kernel += int(grid[two_d_to_index(width-2, y, width)])
+				kernel += int(grid[two_d_to_index(width-2, y+1, width)])
 
 				if kernel < 302 {
 					coordinates = append(coordinates, Coordinate{
-						x:width-1,
-						y:y,
+						x: width - 1,
+						y: y,
 					})
 				}
 			}
@@ -331,28 +331,28 @@ func day4b(fileName string) error {
 		// You don't need a loop or even counting because there are three
 		// adjacent spaces and we are checking for less than four. Under that
 		// condition it becomes a tautology
-		if grid[two_d_to_index(0,0,width)] == '@' {
+		if grid[two_d_to_index(0, 0, width)] == '@' {
 			coordinates = append(coordinates, Coordinate{
-				x:0,
-				y:0,
+				x: 0,
+				y: 0,
 			})
 		}
-		if grid[two_d_to_index(width-1,0,width)] == '@' {
+		if grid[two_d_to_index(width-1, 0, width)] == '@' {
 			coordinates = append(coordinates, Coordinate{
-				x:width-1,
-				y:0,
+				x: width - 1,
+				y: 0,
 			})
 		}
-		if grid[two_d_to_index(0,h-1,width)] == '@' {
+		if grid[two_d_to_index(0, h-1, width)] == '@' {
 			coordinates = append(coordinates, Coordinate{
-				x:0,
-				y:h-1,
+				x: 0,
+				y: h - 1,
 			})
 		}
-		if grid[two_d_to_index(width-1,h-1,width)] == '@' {
+		if grid[two_d_to_index(width-1, h-1, width)] == '@' {
 			coordinates = append(coordinates, Coordinate{
-				x:width-1,
-				y:h-1,
+				x: width - 1,
+				y: h - 1,
 			})
 		}
 

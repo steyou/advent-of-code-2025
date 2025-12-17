@@ -1,14 +1,14 @@
 package main
 
 import (
-	"slices"
-	"cmp"
-	"strings"
-	"strconv"
-	"os"
-	"fmt"
-	"sort"
 	"bufio"
+	"cmp"
+	"fmt"
+	"os"
+	"slices"
+	"sort"
+	"strconv"
+	"strings"
 )
 
 type Pair struct {
@@ -45,8 +45,8 @@ func day5a(fileName string) error {
 		}
 
 		pairs = append(pairs, Pair{
-			foo:lower,
-			bar:upper,
+			foo: lower,
+			bar: upper,
 		})
 	}
 

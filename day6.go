@@ -1,18 +1,18 @@
 package main
 
 import (
-	"math"
 	"bufio"
-	"strings"
-	"strconv"
-	"io"
 	"fmt"
-	"os"
 	"github.com/icza/backscanner"
+	"io"
+	"math"
+	"os"
+	"strconv"
+	"strings"
 )
 
 type Problem6 struct {
-	operator byte
+	operator         byte
 	colStart, colEnd int
 }
 
@@ -173,11 +173,11 @@ func day6b(fileName string) error {
 		if digitsLen > 0 {
 			num := 0
 			for e := 0; e < digitsLen; e++ {
-				num += int(digits[e]) * int(math.Pow10(digitsLen - e - 1))
+				num += int(digits[e]) * int(math.Pow10(digitsLen-e-1))
 			}
 			nums = append(nums, Pair6{
-				foo:num,
-				bar:col,
+				foo: num,
+				bar: col,
 			})
 		}
 	}

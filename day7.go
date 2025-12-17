@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"github.com/icza/backscanner"
 	"os"
 )
 
@@ -65,53 +66,58 @@ func day7b(fileName string) error {
 
 	fsize := fileStatus.Size()
 
-	scanner := bufio.NewScanner(file)
+	backScanner := backscanner.New(file, int(fsize))
 
-	// skip the top line
-	scanner.Scan()
+	// Skip trailing empty line
+	backScanner.Line()
 
-	// Read first data line
-	scanner.Scan()
-	lineBytes := scanner.Bytes()
-	lineBytesLen := len(lineBytes)
-
-	lines := make([]string, 0, int(fsize)/lineBytesLen)
-	lines = append(lines, string(lineBytes))
-
-	for scanner.Scan() {
-		lines = append(lines, scanner.Text())
+	// Get first line to determine width
+	line, _, err := backScanner.Line()
+	if err != nil {
+		return err
 	}
 
-	linesLen := len(lines)
-	values := make([]int, linesLen*lineBytesLen)
+	lineBytesLen := len(line)
+
+	// Allocate two row buffers
+	currentRow := make([]int, lineBytesLen)
+	nextRow := make([]int, lineBytesLen)
 
 	// Initialize bottom row (base case)
-	for i := 0; i < lineBytesLen; i++ {
-		values[(linesLen-1)*lineBytesLen+i] = 1
-	}
-
-	// Bottom-up DP: work from second-to-last row upward
-	for y := linesLen - 2; y >= 0; y-- {
-		for x := 0; x < lineBytesLen; x++ {
-			c := lines[y][x]
-			if c == '^' {
-				values[y*lineBytesLen+x] = values[(y+1)*lineBytesLen+(x-1)] + values[(y+1)*lineBytesLen+(x+1)]
-			} else {
-				values[y*lineBytesLen+x] = values[(y+1)*lineBytesLen+x]
-			}
-		}
-	}
-
-	// Print values as 2D grid for visualization
-	for y := 0; y < linesLen; y++ {
-		for x := 0; x < lineBytesLen; x++ {
-			fmt.Printf("%3d ", values[y*lineBytesLen+x])
-		}
-		fmt.Println()
+	for x := 0; x < lineBytesLen; x++ {
+		currentRow[x] = 1
+		fmt.Printf("%3d ", currentRow[x])
 	}
 	fmt.Println()
 
-	// Find starting position and print result
-	fmt.Println("Answer:", values[lineBytesLen>>1])
+	// Process all rows backwards
+	for {
+		// Compute next row based on current and line
+		for x := 0; x < lineBytesLen; x++ {
+			if line[x] == '^' {
+				nextRow[x] = currentRow[x-1] + currentRow[x+1]
+			} else {
+				nextRow[x] = currentRow[x]
+			}
+		}
+
+		// Print processed row
+		for x := 0; x < lineBytesLen; x++ {
+			fmt.Printf("%3d ", nextRow[x])
+		}
+		fmt.Println()
+
+		// Swap buffers
+		currentRow, nextRow = nextRow, currentRow
+
+		// Fetch next line for next iteration
+		line, _, err = backScanner.Line()
+		if err != nil {
+			break
+		}
+	}
+
+	fmt.Println()
+	fmt.Println("Answer:", currentRow[lineBytesLen>>1])
 	return nil
 }
