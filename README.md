@@ -36,6 +36,7 @@ called `input/day2.txt` as it involves generating code ahead of time.
 [Link to file](https://github.com/steyou/advent-of-code-2025/blob/df39222cc16c7ea58af865c66a93d3f3b0ab9349/day1.go)
 
 - **Part 1** Move the dial with modulo arithmetic, following Python's negative handling of the modulus operator rather than Go's native modulus. **O(n)** where n = number of commands.
+
 - **Part 2** A variation of Part 1 with slightly harder math and handling an edge case if the dial is already at zero. **O(n)** where n = number of commands.
 
 ### Day 2
@@ -77,3 +78,51 @@ called `input/day2.txt` as it involves generating code ahead of time.
 - **Part 1** Read file backwards so that you can access the operators first and initialize an array of results with 1 or 0 depending on if the operator is multiply or add. Then parse every line and do the operation. **O(L·c)** where L = number of lines, c = columns per line.
 
 - **Part 2** Read each column top-to-bottom, collecting non-space digits to form numbers. Parse the operator line into column ranges, then use binary search to map each number's column position to its corresponding operator for accumulation. **O(w·h + m log p)** where w = width, h = height of grid, m = numbers extracted, p = number of problems/operators.
+
+### Day 7
+
+[Link to file](https://github.com/steyou/advent-of-code-2025/blob/8b4070fcd60b43d2e1a4a5e1fb6775159976f2c4/day7.go)
+
+- **Part 1** Just the obvious solution implied by the problem. Literally draw the beams in memory and count when you split.
+
+- **Part 2** Store values over the width of the input, processing from the bottom up. Every time there is a diagonal `^`, increment the counter above that `^`. The answer is the value in the middle at the top of the input. This I find easier than trying to solve recursively.
+
+### Day 8
+
+[Link to file](https://github.com/steyou/advent-of-code-2025/blob/8b4070fcd60b43d2e1a4a5e1fb6775159976f2c4/day8.go)
+
+- **Part 1** A modified Kruskall's algorithm.
+
+- **Part 2** Modify the driver loop to observe the number of circuits and stop there.
+
+### Day 9
+
+[Link to file](https://github.com/steyou/advent-of-code-2025/blob/8b4070fcd60b43d2e1a4a5e1fb6775159976f2c4/day9.go)
+
+- **Part 1** Brute-force measuring the area of all coordinates.
+
+- **Part 2** Simply put, determine if all corners (ie including the two implied corners) are within the bounds of the polygon. After that check the edges don't intersect via bounds checking.
+
+### Day 10
+
+[Link to file](https://github.com/steyou/advent-of-code-2025/blob/8b4070fcd60b43d2e1a4a5e1fb6775159976f2c4/day10.go)
+
+- **Part 1** If you represent bits as nodes and operations as edges you have a directed graph which you can traverse via recursive DFS. You keep a map to avoid duplicate states and have a means to terminate the recursion.
+
+- **Part 2** This one goes over my head. I feel it involves a system of linear equations but I'm unsure about how to form them.
+
+### Day 11
+
+[Link to file](https://github.com/steyou/advent-of-code-2025/blob/8b4070fcd60b43d2e1a4a5e1fb6775159976f2c4/day11.go)
+
+- **Part 1** Parse the graph twice: a first pass counts nodes and max fan-out, and a second pass maps names to dense indices while writing neighbor indices into a flat array. A memoized DFS (`countPaths`) then walks the DAG from `svr` to `out`, so runtime is **O(V+E)**.
+
+- **Part 2** Uses the identical machinery except you run the program with multiple passes targeting `svr -> fft`, `fft -> dac`, `dac -> out`, and multiplying the outputs with a calculator.
+
+### Day 12
+
+[Link to file](https://github.com/steyou/advent-of-code-2025/blob/8b4070fcd60b43d2e1a4a5e1fb6775159976f2c4/day12.go)
+
+- **Part 1** This is an NP-complete problem in the general case. Turns out the answer is the dumb one: just sum the areas. I guess there exists a way to tile the input perfectly. Here I've skipped parsing the top half - you need to provide a truncated input and provide the areas in the code.
+
+- **Part 2** Cannot solve until Day 10 Part 2 is solved.
